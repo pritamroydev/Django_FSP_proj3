@@ -1,0 +1,27 @@
+System Design:
+
+    Customer Operations:
+        1. Add Customer.....no
+        2. View all Customer.....yes
+        3. View Customer details.....yes
+        4. View Customer orders.....yes
+        5. Update Customer.....no
+        6. Delete Customer....no
+
+    Product Operations:
+        1. Add Product..........no
+        2. View Product list....yes
+        3. View Product details....yes
+        4. Update Product....no
+        5. Delete Product....no
+        6. Filter by Category/Tags....no
+        
+    Order Operations:
+        1. Create Order....no
+        2. View all Order....yes
+        3. Update Order status....no
+        4. Delete Operations....no
+
+    Tags Operations:
+        1. Add Tags....no
+        2. Assign Tags to Product....no
