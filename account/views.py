@@ -25,6 +25,13 @@ def Home(request):
 
 
 
+def order_list(request):
+    order=Order.objects.all()
+    return render(request, 'account/order_list.html', {'order':order})
+
+
+
+
 
 def Prod(request):
     product=Product.objects.all()
