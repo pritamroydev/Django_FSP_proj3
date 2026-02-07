@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Product,Customer,Order,Tag
-from .forms import OrderForm, UpdateOrder, CustomerFrom
+from .forms import OrderForm, UpdateOrder, CustomerFrom, ProductForm
 
 # Create your views here.
 def Home(request):
@@ -129,3 +129,67 @@ def create_customer(request):
             return redirect('/')
     context={'form':form}
     return render(request, 'account/create_customer.html',context)
+
+
+def update_customer(request,pk):
+    customer=Customer.objects.get(id=pk)
+    form=CustomerFrom(instance=customer)
+    #form=CustomerForm(instance=customer)
+
+    if request.method=="POST":
+        form=CustomerFrom(request.POST,instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context={'form':form}
+    return render(request, 'account/create_customer.html', context)
+
+
+def deleteorder(request,pk):
+    order=Order.objects.get(id=pk)
+    if request.method=="POST":
+        order.delete()
+        return redirect('/')
+    context={'item':order}
+    return render(request,'account/delete.html',context) 
+
+#deleting customer 7-2
+def deletecustomer(request,pk):
+    customer=Customer.objects.get(id=pk)
+    if request.method=="POST":
+        customer.delete()
+        return redirect('/')
+    context={'item':customer}
+    return render(request,'account/delete_customer.html',context)
+
+
+def add_product(request):
+    form=ProductForm()
+    if request.method=="POST":
+        form=ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product')
+    context={'form':form}
+    return render(request, 'account/add_product.html',context)
+
+
+
+def update_product(request,pk):
+    product=Product.objects.get(id=pk)
+    form=ProductForm(instance=product)
+    if request.method=='POST':
+        form=ProductForm(request.POST , instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product')
+    context={'form':form}
+    return render(request, 'account/add_product.html', context)
+
+def deleteproduct(request,pk):
+    product=Product.objects.get(id=pk)
+    if request.method=="POST":
+        product.delete()
+        return redirect('product')
+    context={'product':product}
+    return render(request,'account/delete_product.html',context)
