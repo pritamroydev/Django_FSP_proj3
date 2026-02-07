@@ -166,7 +166,7 @@ def deletecustomer(request,pk):
 def add_product(request):
     form=ProductForm()
     if request.method=="POST":
-        form=ProductForm(request.POST)
+        form=ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('product')

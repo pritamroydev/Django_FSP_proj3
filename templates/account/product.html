@@ -36,7 +36,12 @@
 								</td>
 								<td>{{i.date_created}}</td>
 								<td>{{i.price}}</td>
-								<td></td>
+								<td>
+								{% if i.pic %}
+									<img src="{{ i.pic.url }}" height="50" width="50">
+								{% endif %}
+								</td>
+								
 								<td><a href="{% url "update_product" i.id %}">Update</a></td>
 								<td><a href="{% url "delete_product" i.id%}">Delete</a></td>
 							</tr>
