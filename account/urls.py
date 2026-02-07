@@ -10,6 +10,8 @@ urlpatterns = [
     path('update_order/<str:pk>/',views.update_order,name='update_order'),
     path('delete_order/<str:pk>',views.delete_order,name='delete_order'),
     path('order_list',views.order_list,name='order_list'),
+    path('create_customer',views.create_customer,name='create_customer'),
+    
 
     
 ]

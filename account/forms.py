@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Order
+from .models import Order,Customer
 
 class OrderForm(ModelForm):
     class Meta:
@@ -12,4 +12,8 @@ class UpdateOrder(ModelForm):
         model=Order
         exclude=['customer']
 
-        
+
+class CustomerFrom(ModelForm):
+    class Meta:
+        model=Customer
+        fields='__all__'

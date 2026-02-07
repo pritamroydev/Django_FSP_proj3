@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Product,Customer,Order,Tag
-from .forms import OrderForm, UpdateOrder
+from .forms import OrderForm, UpdateOrder, CustomerFrom
 
 # Create your views here.
 def Home(request):
@@ -106,6 +106,8 @@ def update_order(request,pk):
 #     return render(request, 'account/order_form.html',context)
 
 
+# ------------ Added functionality of deleting order after clicking in button without changing the name option-------------------
+
 def delete_order(request, pk):
     order=Order.objects.get(id=pk)
     if request.method=="POST":
@@ -114,3 +116,16 @@ def delete_order(request, pk):
     context = {'item':order}
     return render(request, 'account/delete.html', context)
     
+
+
+# ------------ Added functionality of creating customer after clicking in button without changing the name option-------------------
+
+def create_customer(request):
+    form=CustomerFrom()
+    if request.method=="POST":
+        form=CustomerFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context={'form':form}
+    return render(request, 'account/create_customer.html',context)
