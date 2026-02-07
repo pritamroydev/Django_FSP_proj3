@@ -9,6 +9,13 @@
     }
     #total-orders{
         background-color: #494949;
+        
+    }
+    #total-orders:hover{
+        transform: translate(-5px);
+        box-shadow: 0 10px 20px rgba(76, 149, 244, 0.444);
+        cursor: pointer;
+
     }
 
     #orders-delivered{
