@@ -7,6 +7,7 @@ System Design:
         4. View Customer orders.....yes
         5. Update Customer.....no
         6. Delete Customer....no
+        7. Place order include inlineFormset
 
     Product Operations:
         1. Add Product..........no

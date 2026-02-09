@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Product,Customer,Order,Tag
 from .forms import OrderForm, UpdateOrder, CustomerFrom, ProductForm
 from django.forms.models import inlineformset_factory
+from .filters import OrderFilter
+import csv
 
 # Create your views here.
 def Home(request):
@@ -32,29 +34,57 @@ def order_list(request):
 
 
 
-
-
 def Prod(request):
     product=Product.objects.all()
     context={'product':product}
     return render(request, 'account/product.html',context)
 
+# def Cust(request,pk_test):
+#     customer=Customer.objects.get(id=pk_test)
+#     orders=customer.order_set.all()
+#     order_count=orders.count()
+#     context={
+#         'customer': customer,
+#         'orders':orders,
+#         'order_count':order_count
+#     }
+#     return render(request, 'account/customer.html',context)
+
 def Cust(request,pk_test):
     customer=Customer.objects.get(id=pk_test)
     orders=customer.order_set.all()
     order_count=orders.count()
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders=myFilter.qs
     context={
         'customer': customer,
         'orders':orders,
-        'order_count':order_count
+        'order_count':order_count,
+        'myFilter':myFilter
     }
     return render(request, 'account/customer.html',context)
-
 
 def Customer_list(request):
     customer=Customer.objects.all()
     context={'customer':customer}
     return render(request, 'account/customer_list.html', context)
+
+def tag_list(request):
+    tag=Tag.objects.all()
+    context={'tag':tag}
+    return render(request, 'account/tag_list.html', context)
+
+
+def import_tag_csv(request):
+    if request.method == "POST":
+        csv_file = request.FILES("file")
+        decoded_file=csv_file.read().decode("utf-8").splitlines()
+        reader=csv.DictReader(decoded_file)
+
+        for row in reader:
+            Tag.objects.get_or_create(name=row["name"])
+        return redirect('tag_list')
+    return render(request, 'account/managing_tag.html')
 
 
 # ------------ Added functionality of creating order after clicking in button -------------------

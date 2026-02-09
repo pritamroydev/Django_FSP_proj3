@@ -17,6 +17,8 @@ urlpatterns = [
     path('add_product',views.add_product,name='add_product'),    
     path('update_product/<str:pk>/',views.update_product,name='update_product'),
     path('delete_product/<str:pk>/',views.deleteproduct,name="delete_product"),
+    path('tag_list',views.tag_list,name='tag_list'),
+    path('import_csv',views.import_tag_csv,name='import_csv')
     
 
 
