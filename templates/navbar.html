@@ -23,5 +23,16 @@
         <a class="nav-link" href="{% url "tag_list" %}">Tag</a>
       </li>
     </ul>
+    
+  </div>
+  <div class="">
+      <span class="hello-msg">
+        Hello, {{request.user}}
+      </span>
+    <span class="">
+      <a class="hello_msg" href="{% url "logout" %}">
+        | Logout
+      </a>
+    </span>
   </div>
 </nav>

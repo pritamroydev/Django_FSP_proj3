@@ -4,8 +4,57 @@ from .forms import OrderForm, UpdateOrder, CustomerFrom, ProductForm
 from django.forms.models import inlineformset_factory
 from .filters import OrderFilter
 import csv
+from .forms import CreateUserForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
+
+# def login(request):
+#     return render(request, 'account/login.html')
+
+def registerpage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form=CreateUserForm()
+        if request.method=="POST":
+            form=CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user=form.cleaned_data.get('username')
+                messages.success(request, "Account was created for "+user)
+    context={'form':form}
+    return render(request, 'account/registration.html', context)
+
+
+
+
+
+def loginpage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method=="POST":
+            username=request.POST.get('username')
+            password=request.POST.get('password')
+
+            user=authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request,"username or password is incorrect..!")
+        return render(request, 'account/login.html')
+
+
+def logoutpage(request):
+    logout(request)
+    return redirect('login')
+@login_required(login_url='login')
+
 def Home(request):
     orders=Order.objects.all()
     customers=Customer.objects.all()
@@ -25,19 +74,21 @@ def Home(request):
     }
 
     return render(request, 'account/dashboard.html',context)
-
+@login_required(login_url='login')
 
 
 def order_list(request):
     order=Order.objects.all()
     return render(request, 'account/order_list.html', {'order':order})
-
+@login_required(login_url='login')
 
 
 def Prod(request):
     product=Product.objects.all()
     context={'product':product}
     return render(request, 'account/product.html',context)
+@login_required(login_url='login')
+
 
 # def Cust(request,pk_test):
 #     customer=Customer.objects.get(id=pk_test)
@@ -63,16 +114,21 @@ def Cust(request,pk_test):
         'myFilter':myFilter
     }
     return render(request, 'account/customer.html',context)
+@login_required(login_url='login')
+
 
 def Customer_list(request):
     customer=Customer.objects.all()
     context={'customer':customer}
     return render(request, 'account/customer_list.html', context)
+@login_required(login_url='login')
+
 
 def tag_list(request):
     tag=Tag.objects.all()
     context={'tag':tag}
     return render(request, 'account/tag_list.html', context)
+@login_required(login_url='login')
 
 
 def import_tag_csv(request):
@@ -85,7 +141,7 @@ def import_tag_csv(request):
             Tag.objects.get_or_create(name=row["name"])
         return redirect('tag_list')
     return render(request, 'account/managing_tag.html')
-
+@login_required(login_url='login')
 
 # ------------ Added functionality of creating order after clicking in button -------------------
 
@@ -98,7 +154,7 @@ def create_order(request):
             return redirect('/')
     context={'form':form}
     return render(request, 'account/order_form.html',context)
-
+@login_required(login_url='login')
 
 def place_order(request, pk):
     orderformset = inlineformset_factory(Customer, Order, fields=('product', 'status'),extra=7)
@@ -112,7 +168,7 @@ def place_order(request, pk):
         
     context={'form':formset}
     return render(request, 'account/order_form.html',context)
-
+@login_required(login_url='login')
 
 
 
@@ -133,7 +189,7 @@ def update_order(request,pk):
 
     context={'form':form, 'order':order, 'customer_name':order.customer.name}
     return render(request, 'account/update_order.html',context)
-
+@login_required(login_url='login')
 
 
 
@@ -162,7 +218,7 @@ def delete_order(request, pk):
         return redirect('/')
     context = {'item':order}
     return render(request, 'account/delete.html', context)
-    
+@login_required(login_url='login')  
 
 
 # ------------ Added functionality of creating customer after clicking in button without changing the name option-------------------
@@ -176,6 +232,7 @@ def create_customer(request):
             return redirect('/')
     context={'form':form}
     return render(request, 'account/create_customer.html',context)
+@login_required(login_url='login')
 
 
 def update_customer(request,pk):
@@ -190,6 +247,7 @@ def update_customer(request,pk):
             return redirect('/')
     context={'form':form}
     return render(request, 'account/create_customer.html', context)
+@login_required(login_url='login')
 
 
 def deleteorder(request,pk):
@@ -199,6 +257,8 @@ def deleteorder(request,pk):
         return redirect('/')
     context={'item':order}
     return render(request,'account/delete.html',context) 
+@login_required(login_url='login')
+
 
 #deleting customer 7-2
 def deletecustomer(request,pk):
@@ -208,6 +268,7 @@ def deletecustomer(request,pk):
         return redirect('/')
     context={'item':customer}
     return render(request,'account/delete_customer.html',context)
+@login_required(login_url='login')
 
 
 def add_product(request):
@@ -219,7 +280,7 @@ def add_product(request):
             return redirect('product')
     context={'form':form}
     return render(request, 'account/add_product.html',context)
-
+@login_required(login_url='login')
 
 
 def update_product(request,pk):
@@ -232,6 +293,8 @@ def update_product(request,pk):
             return redirect('product')
     context={'form':form}
     return render(request, 'account/add_product.html', context)
+@login_required(login_url='login')
+
 
 def deleteproduct(request,pk):
     product=Product.objects.get(id=pk)
