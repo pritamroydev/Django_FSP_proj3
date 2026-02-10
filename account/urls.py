@@ -18,7 +18,7 @@ urlpatterns = [
     path('update_product/<str:pk>/',views.update_product,name='update_product'),
     path('delete_product/<str:pk>/',views.deleteproduct,name="delete_product"),
     path('tag_list',views.tag_list,name='tag_list'),
-    path('import_csv',views.import_tag_csv,name='import_csv')
+    path('import_csv',views.import_tag_csv,name='import_csv'),
     
 
 

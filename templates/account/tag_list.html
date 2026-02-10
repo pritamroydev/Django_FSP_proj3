@@ -4,8 +4,11 @@
     <br>
 		<div class="row">
 			<div class="col-md">
-				<div class="card card-body">
-					<h5>Tag List</h5>
+				<div class="card card-body flex flex-row justify-content-between">
+					<h5 class="fw-bold text-dark fs-4">Tag List</h5>
+					<a href="{% url "import_csv" %}">
+						<button type="button" class="btn btn-primary">Import Tags</button>
+					</a>
 				</div>
 				<div class="card card-body">
 					<table class="table">

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login | Modern App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f59e0b;
+            --gradient-start: #6366f1;
+            --gradient-end: #8b5cf6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fdf2f8 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background: white;
+            min-height: 650px;
+        }
+        
+        .login-illustration {
+            flex: 1;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-illustration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .illustration-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .illustration-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .illustration-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto 30px;
+        }
+        
+        .graphic-container {
+            margin: 40px auto;
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        
+        .graphic-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            top: 10px;
+            left: 30px;
+        }
+        
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 20px;
+            right: 40px;
+        }
+        
+        .graphic-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .login-form-container {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .form-header {
+            margin-bottom: 40px;
+        }
+        
+        .form-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            width: 100%;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+        
+        .form-control {
+            height: 60px;
+            padding-left: 55px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--bg-light);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            background-color: white;
+        }
+        
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+        
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border: none;
+            color: white;
+            height: 60px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: var(--text-light);
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            border: 2px solid #e5e7eb;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .social-btn.google:hover {
+            border-color: #db4437;
+            color: #db4437;
+        }
+        
+        .social-btn.facebook:hover {
+            border-color: #4267B2;
+            color: #4267B2;
+        }
+        
+        .social-btn.apple:hover {
+            border-color: #000000;
+            color: #000000;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-light);
+        }
+        
+        .form-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .form-footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .login-illustration {
+                padding: 30px;
+                min-height: 250px;
+            }
+            
+            .illustration-content h2 {
+                font-size: 2rem;
+            }
+            
+            .graphic-container {
+                width: 200px;
+                height: 150px;
+            }
+            
+            .login-form-container {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .login-container {
+                border-radius: 16px;
+            }
+            
+            .login-form-container {
+                padding: 30px 20px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left side - Illustration -->
+        <div class="login-illustration">
+            <div class="illustration-content">
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your personalized dashboard, track your progress, and connect with our community of users.</p>
+                
+                <div class="graphic-container">
+                    <div class="graphic-circle circle-1"></div>
+                    <div class="graphic-circle circle-2"></div>
+                    <div class="graphic-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <p><i class="fas fa-shield-alt mr-2"></i> Your security is our priority. We use advanced encryption to protect your data.</p>
+            </div>
+        </div>
+        
+        <!-- Right side - Login Form -->
+        <div class="login-form-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="logo-text">Nexus</div>
+            </div>
+            
+            <div class="form-header">
+                <h1>Sign In</h1>
+                <p>Enter your credentials to access your account</p>
+            </div>
+            
+            <form method="POST" action="" class="form-container">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" placeholder="Username or email" class="form-control" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-key"></i>
+                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn login-btn">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+                </button>
+                
+                <div class="divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <button type="button" class="social-btn apple">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                </div>
+            </form>
+            
+            <div class="form-footer">
+                Don't have an account? <a href="{% url 'register' %}">Sign up now</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Add some interactive effects
+        $(document).ready(function() {
+            // Input focus effect
+            $('.form-control').on('focus', function() {
+                $(this).parent().find('i').css('color', 'var(--primary-dark)');
+            });
+            
+            $('.form-control').on('blur', function() {
+                $(this).parent().find('i').css('color', 'var(--primary-color)');
+            });
+            
+            // Social button hover effect
+            $('.social-btn').on('mouseenter', function() {
+                $(this).css('transform', 'translateY(-2px)');
+            });
+            
+            $('.social-btn').on('mouseleave', function() {
+                $(this).css('transform', 'translateY(0)');
+            });
+            
+            // Form submission simulation
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+                const loginBtn = $(this).find('.login-btn');
+                const originalText = loginBtn.html();
+                
+                // Show loading state
+                loginBtn.html('<i class="fas fa-spinner fa-spin mr-2"></i> Signing In...');
+                loginBtn.prop('disabled', true);
+                
+                // Simulate API call
+                setTimeout(function() {
+                    // Reset button
+                    loginBtn.html(originalText);
+                    loginBtn.prop('disabled', false);
+                    
+                    // Show success message (in a real app, this would be based on actual authentication)
+                    alert('Login functionality would be processed here. This is a design demo.');
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

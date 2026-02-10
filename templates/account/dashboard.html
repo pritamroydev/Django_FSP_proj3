@@ -4,10 +4,15 @@
 <br>
 <div class="row">
 	<div class="col-md-5">
-		<h5>CUSTOMERS:</h5>
+		{% comment %} <h5>CUSTOMERS:</h5> {% endcomment %}
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="{% url "create_customer" %}">Create Customer</a>
+			<div class="col-md border-0 card card-body flex flex-row justify-content-between p-0 mb-3">
+				<h5 class="fw-bold text-dark fs-4">Customers</h5>
+				<a class="" href="{% url "create_customer" %}">
+					<button type="button" class="btn btn-primary">Create New Customer</button>
+				</a>
+			</div>
 			<table class="table table-sm">
 				<tr>
 					<th>Views</th>
@@ -16,7 +21,7 @@
 				</tr>
 				{% for customer in customers %}
 					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+						<td><a class="btn btn-sm btn-primary" href="{% url 'customer' customer.id %}">View</a></td>
 						<td>{{customer.name}}</td>
 						<td>{{customer.phone}}</td>
 					</tr>
@@ -27,10 +32,15 @@
 	</div>
 
 	<div class="col-md-7">
-		<h5>LAST 5 ORDERS</h5>
+		{% comment %} <h5>LAST 5 ORDERS</h5> {% endcomment %}
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_order' %}">Create Order</a>
+			<div class="col-md border-0 card card-body flex flex-row justify-content-between p-0 mb-3">
+				<h5 class="fw-bold text-dark fs-4">Orders</h5>
+				<a class="" href="{% url "create_order" %}">
+					<button type="button" class="btn btn-primary">Create New Order</button>
+				</a>
+			</div>
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>

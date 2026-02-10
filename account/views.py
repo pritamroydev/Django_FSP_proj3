@@ -77,7 +77,7 @@ def tag_list(request):
 
 def import_tag_csv(request):
     if request.method == "POST":
-        csv_file = request.FILES("file")
+        csv_file = request.FILES.get("file")
         decoded_file=csv_file.read().decode("utf-8").splitlines()
         reader=csv.DictReader(decoded_file)
 
