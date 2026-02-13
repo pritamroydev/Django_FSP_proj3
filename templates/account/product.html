@@ -38,12 +38,16 @@
 								<td>{{i.price}}</td>
 								<td>
 								{% if i.pic %}
-									<img src="{{ i.pic.url }}" height="50" width="50">
+									<img class="rounded" src="{{ i.pic.url }}" height="100" width="100">
 								{% endif %}
 								</td>
 								
-								<td><a href="{% url "update_product" i.id %}">Update</a></td>
-								<td><a href="{% url "delete_product" i.id%}">Delete</a></td>
+								<td><a href="{% url "update_product" i.id %}">
+									<button class="btn btn-primary">Update</button>
+								</a></td>
+								<td><a href="{% url "delete_product" i.id%}">
+									<button class="btn btn-danger">Delete</button>
+								</a></td>
 							</tr>
 						{% endfor %}
 

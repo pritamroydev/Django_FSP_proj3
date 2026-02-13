@@ -23,9 +23,24 @@
 								<td>{{i.customer.name}}</td>
 								<td>{{i.product}}</td>
 								<td>{{i.date_created}}</td>
-								<td>{{i.status}}</td>
-								<td><a href="{% url 'update_order' i.id %}">Update</a></td>
-								<td><a href="{% url 'delete_order' i.id %}">Delete</a></td>
+								{% comment %} <td>{{i.status}}</td> {% endcomment %}
+								<td>
+									{% if i.status|lower == "pending" %}
+										<button class="btn btn-sm text-dark p-2 bg-danger rounded-pill">{{ i.status }}</button>
+									{% elif i.status|lower == "out for delivery" %}
+										<span class="btn btn-sm text-dark p-1  bg-warning rounded-pill">{{ i.status }}</span>
+									{% else %}
+										<span class="btn btn-sm text-dark p-2  bg-success text-white rounded-pill">{{ i.status }}</span>
+									
+									{% endif %}
+								</td>
+								
+								<td><a href="{% url 'update_order' i.id %}">
+									<button class="btn btn-primary">Update</button>
+								</a></td>
+								<td><a href="{% url 'delete_order' i.id %}">
+									<button class="btn btn-danger">Delete</button>
+								</a></td>
 							</tr>
 						{% endfor %}
 

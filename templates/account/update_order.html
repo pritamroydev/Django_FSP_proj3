@@ -5,10 +5,10 @@
 
 
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h4 class="card-title">Customer name</h4>
-    <h5 class="card-title">{{customer_name}}</h5>
+<div class="card m-3" style="width: 18rem;">
+  <div class="card-body ">
+    <h4 class="card-title fs-6 text-muted">Customer name</h4>
+    <h5 class="card-title fs-1">{{customer_name}}</h5>
     <form action="" method="POST">
     {% csrf_token %}
   </div>
@@ -18,8 +18,8 @@
     <li class="list-group-item">Status:- {{form.status}}</li>
   </ul>
 <div class="card-body">
-    <a href="{% url "home" %}" class="card-link">Back</a>
-    <input type="submit" name="submit">
+    <a href="{% url "order_list" %}" class="card-link btn btn-danger">Back</a>
+    <input type="submit" name="submit" class="btn btn-primary">
 </div>
 
 </form>

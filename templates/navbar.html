@@ -25,13 +25,13 @@
     </ul>
     
   </div>
-  <div class="">
-      <span class="hello-msg">
-        Hello, {{request.user}}
+  <div class="ms-auto text-end m-5">
+      <span class="hello-msg text-mute">
+        Hello, {{request.user}} | 
       </span>
       <span class="">
         <a class="hello_msg" href="{% url "logout" %}">
-        | Logout
+        Logout
       </a>
     </span>
   </div>

@@ -4,11 +4,11 @@
 <br>
 <div class="card">
     <div class="card-body">
-        <p>Are you sure you want to delete....?{{item}}</p>
+        <p>Are you sure you want to delete {{product.name}} ?</p>
         <form action="{% url 'delete_product' product.id %}" method="POST">
             {% csrf_token %}
-            <a class="btn btn-warning" href="{% url 'product' %}">Cancel</a>
-            <input class ="btn btn-danger" type="submit"name="Confirm">
+            <a class="btn btn-primary" href="{% url 'product' %}">Cancel</a>
+            <input class ="btn btn-danger" type="submit"name="Confirm" value="Delete">
         </form>
     </div>
 </div>

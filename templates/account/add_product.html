@@ -2,15 +2,16 @@
 {% load static %}
 {% block content %} 
 
-<h4> Create a New product in the database </h4>
 <div class="row">
     <div class="col-md-6">
-        <div class="card card-body">
+        <div class="card card-body m-2">
+            <h4 class="text-dark mb-4"> Create a new product in the database </h4>
             <form action=""method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
                 {{form.as_p}}
-                <input type="submit" name="submit">
+                <a class="btn btn-danger" href="{% url 'product' %}">Cancel</a>
+                <input type="submit" name="submit" class="btn btn-primary">
             </form>
         </div>
     </div>

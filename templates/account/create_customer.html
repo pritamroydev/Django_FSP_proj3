@@ -2,14 +2,15 @@
 {% load static %}
 {% block content %} 
 
-<h4> Create a New Customer in the database </h4>
 <div class="row">
     <div class="col-md-6">
         <div class="card card-body">
+            <h4 class="card-title mb-4 text-muted"> Create a New Customer in the database </h4>
             <form action=""method="POST">
                 {% csrf_token %}
                 {{form.as_p}}
-                <input type="submit" name="submit">
+                <a href="{% url "home" %}" class="card-link btn btn-danger">Back</a>
+                <input type="submit" name="submit" class="btn btn-primary">
             </form>
         </div>
     </div>
