@@ -1,6 +1,9 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <img class="rounded m-3" style="width: 100px; height: auto;" src="{% static 'image/ikea.jpeg' %}">
+  <a  href="{% url "home" %}">
+
+    <img class="rounded m-3" style="width: 100px; height: auto;" src="{% static 'image/ikea.jpeg' %}">
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
